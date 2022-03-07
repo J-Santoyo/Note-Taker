@@ -22,5 +22,17 @@ module.exports = route1 => {
             updateDb();
             res.json(notes);
         });
+
+        // retrieves note wirth specific id
+        route1.get("/api/notes/:id", function(req, res) {
+            res.json(notes[req.params.id]);
+        });
+
+        // BONUS Deletes notes with specific id
+        route1.delete("/api/notes/:id", function(req, res) {
+            notes.splice(req.params.id, 1);
+            updateDb();
+            res.json(notes);
+        });
     })
 }
