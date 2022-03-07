@@ -34,5 +34,19 @@ module.exports = route1 => {
             updateDb();
             res.json(notes);
         });
-    })
+
+        // Display notes.html when notes is accessed
+        route1.get('/notes', function(req, res) {
+            res.sendFile(path.join(__dirname, "../public/index.html"));
+        });
+
+        // updates json file when note is added or deleted
+
+        function updateDb() {
+            fs.writeFile("db/db.json",JSON.stringify(notes,'\t'),err => {
+                if (err) throw err;
+                return true;
+            });
+        }
+    });
 }
