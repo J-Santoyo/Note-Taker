@@ -9,5 +9,8 @@ module.exports = route1 => {
         if (err) throw err;
 
         var notes = JSON.parse(data);
+
+        // API setup and notes routes
+        route1.get("")
     })
 }
