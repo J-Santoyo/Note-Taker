@@ -11,6 +11,16 @@ module.exports = route1 => {
         var notes = JSON.parse(data);
 
         // API setup and notes routes
-        route1.get("")
+        route1.get("/api/notes", function(req, res) {
+            // read the db.json file to return saved notes as JSON
+            res.json(notes);
+        });
+        route1.post("/api/notes", function(req, res) {
+            // receives new note, add it to db.json and returns new note
+            let newNote = req.body;
+            notes.push(newNote);
+            updateDb();
+            res.json(notes);
+        });
     })
 }
