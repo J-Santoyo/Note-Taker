@@ -77,3 +77,30 @@ const handleNoteSave = () => {
         renderActiveNote();
     });
 };
+
+// Delete the clicked note
+
+const handleNoteDelete = (e) => {
+    e.stopPropagation();
+
+    const note = e.target;
+    const noteId = JSON.parse(note.parentElement.getAttribute('data-note')).id;
+    
+    if (activeNote.id === noteId) {
+        activeNote = {};
+    }
+
+    deleteNote(noteId).then(() => {
+        getAndRenderNotes();
+        renderActiveNote();
+    });
+};
+
+// Sets the activeNote and displays it
+const handleNoteView = (e) => {
+    e.preventDefault();
+    activeNote = JSON.parse(e.target.parentElement.getAttribute('data-note'));
+    renderActiveNote();
+};
+
+// Sets the active note to an ampty object and allows the user to enter a new note
